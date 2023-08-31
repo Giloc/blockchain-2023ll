@@ -1,4 +1,4 @@
-pub mod encrypt;
+use sha256::{digest};
 
 pub struct Tree{
     pub root: Node
@@ -42,9 +42,6 @@ pub fn make_merkle_tree( transactions: &Vec<String>) -> Tree{
 
 fn generate_new_hash(node1: &Node, node2: &Node) -> String{
     let hash_concatenated = node1.hash.clone() + &node2.hash;
-    println!("hash1 : {}", node1.hash.clone());
-    println!("hash2 : {}", node2.hash.clone());
-    println!("hash3 : {}", hash_concatenated);
-    println!("new hash : {}", encrypt::encrypt(&hash_concatenated));
-    return encrypt::encrypt(&hash_concatenated);
+
+    return digest(&hash_concatenated);
 }
